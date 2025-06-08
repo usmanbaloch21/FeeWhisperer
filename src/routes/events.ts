@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { EventController } from '../controllers/EventController.ts';
+import { EventController } from '../controllers/EventController';
 
 /**
  * Event-related API routes

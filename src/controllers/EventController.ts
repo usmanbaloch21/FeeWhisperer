@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { FeeEventModel } from '../models/FeeEvent.ts';
-import { ScanProgressModel } from '../models/ScanProgress.ts';
-import { ApiResponse, EventQueryParams } from '../types/index.ts';
-import { logger } from '../utils/logger.ts';
-import { BlockchainUtils } from '../utils/blockchain.ts';
+import { FeeEventModel } from '../models/FeeEvent';
+import { ScanProgressModel } from '../models/ScanProgress';
+import { ApiResponse, EventQueryParams } from '../types/index';
+import { logger } from '../utils/logger';
+import { BlockchainUtils } from '../utils/blockchain';
 import Joi from 'joi';
 
 /**

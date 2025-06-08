@@ -1,7 +1,7 @@
 import { ethers, BigNumber } from 'ethers';
-import { ParsedFeeCollectedEvent, ChainConfig } from '../types/index.ts';
-import { BlockchainUtils } from '../utils/blockchain.ts';
-import { logger } from '../utils/logger.ts';
+import { ParsedFeeCollectedEvent, ChainConfig } from '../types/index';
+import { BlockchainUtils } from '../utils/blockchain';
+import { logger } from '../utils/logger';
 
 /**
  * Service for interacting with FeeCollector smart contracts

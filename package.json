@@ -6,8 +6,10 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/app.ts",
-    "build": "tsc",
-    "start": "node dist/app.js",
+    "build": "npm run clean && tsc -p tsconfig.build.json",
+    "clean": "rm -rf dist",
+    "build:clean": "rm -rf dist && npm run build",
+    "start": "node --experimental-specifier-resolution=node dist/app.js",
     "lint": "eslint src/**/*.ts",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.js",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.js --watch",

@@ -1,5 +1,5 @@
 import { ethers, BigNumber } from 'ethers';
-import { logger } from './logger.ts';
+import { logger } from './logger';
 
 /**
  * Blockchain utility functions

@@ -1,4 +1,4 @@
-import { ChainConfig } from '../types/index.ts';
+import { ChainConfig } from '../types/index';
 
 /**
  * Blockchain network configurations

@@ -1,9 +1,9 @@
-import { FeeCollectorService } from './FeeCollectorService.ts';
-import { FeeEventModel } from '../models/FeeEvent.ts';
-import { ScanProgressModel } from '../models/ScanProgress.ts';
-import { ChainConfig, ScannerConfig, ParsedFeeCollectedEvent } from '../types/index.ts';
-import {  createChildLogger } from '../utils/logger.ts';
-import { BlockchainUtils } from '../utils/blockchain.ts';
+import { FeeCollectorService } from './FeeCollectorService';
+import { FeeEventModel } from '../models/FeeEvent';
+import { ScanProgressModel } from '../models/ScanProgress';
+import { ChainConfig, ScannerConfig, ParsedFeeCollectedEvent } from '../types/index';
+import {  createChildLogger } from '../utils/logger';
+import { BlockchainUtils } from '../utils/blockchain';
 
 /**
  * Event scanner service that efficiently scans for new events and stores them

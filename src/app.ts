@@ -2,12 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
-import { DatabaseConfig } from './config/database.ts';
-import { getChainConfig } from './config/chains.ts';
-import { EventScanner } from './services/EventScanner.ts';
-import { eventRoutes } from './routes/events.ts';
-import { logger } from './utils/logger.ts';
-import { ApiResponse } from './types/index.ts';
+import { DatabaseConfig } from './config/database';
+import { getChainConfig } from './config/chains';
+import { EventScanner } from './services/EventScanner';
+import { eventRoutes } from './routes/events';
+import { logger } from './utils/logger';
+import { ApiResponse } from './types/index';
 
 // Load environment variables
 dotenv.config();
@@ -45,7 +45,7 @@ class Application {
     this.app.use(express.urlencoded({ extended: true }));
 
     // Request logging middleware
-    this.app.use((req, res, next) => {
+    this.app.use((req, _res, next) => {
       logger.info(`${req.method} ${req.path}`, {
         ip: req.ip,
         userAgent: req.get('User-Agent'),
@@ -63,7 +63,7 @@ class Application {
    */
   private setupRoutes(): void {
     // Health check endpoint
-    this.app.get('/health', (req, res) => {
+    this.app.get('/health', (_req, res) => {
       const response: ApiResponse<any> = {
         success: true,
         data: {
@@ -80,7 +80,7 @@ class Application {
     this.app.use('/api/events', eventRoutes);
 
     // 404 handler
-    this.app.use('*', (req, res) => {
+    this.app.use('*', (_req, res) => {
       const response: ApiResponse<null> = {
         success: false,
         error: 'Endpoint not found',
@@ -93,7 +93,7 @@ class Application {
    * Setup error handling middleware
    */
   private setupErrorHandling(): void {
-    this.app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    this.app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
       logger.error('Unhandled error:', err);
       
       const response: ApiResponse<null> = {
