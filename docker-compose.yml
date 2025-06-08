@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # MongoDB database
+  mongodb:
+    image: mongo:7.0
+    container_name: fee-collector-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: fee-collector-scanner
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
+    networks:
+      - fee-collector-network
+
+  # Fee Collector Scanner Application
+  fee-collector-scanner:
+    build: .
+    container_name: fee-collector-app
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    environment:
+      NODE_ENV: production
+      MONGODB_URI: mongodb://admin:password123@mongodb:27017/fee-collector-scanner?authSource=admin
+      POLYGON_RPC_URL: https://polygon-rpc.com
+      FEE_COLLECTOR_ADDRESS: 0xbD6C7B0d2f68c2b7805d88388319cfB6EcB50eA9
+      SCAN_BATCH_SIZE: 10000
+      SCAN_INTERVAL_MS: 30000
+      STARTING_BLOCK: 70000000
+      PORT: 3000
+      API_RATE_LIMIT: 100
+      LOG_LEVEL: info
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - fee-collector-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  fee-collector-network:
+    driver: bridge
