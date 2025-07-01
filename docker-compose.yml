@@ -7,8 +7,6 @@ services:
     container_name: fee-collector-mongodb
     restart: unless-stopped
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password123
       MONGO_INITDB_DATABASE: fee-collector-scanner
     ports:
       - "27017:27017"
