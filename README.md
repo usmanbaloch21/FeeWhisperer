@@ -84,16 +84,10 @@ MONGODB_URI=mongodb://localhost:27017/fee-collector-scanner
 #### Option B: Using Docker 
 ```bash
 # Start MongoDB container
-docker run -d \
-  --name fee-collector-mongodb \
-  -p 27017:27017 \
-  -e MONGO_INITDB_ROOT_USERNAME=admin \
-  -e MONGO_INITDB_ROOT_PASSWORD=password123 \
-  -e MONGO_INITDB_DATABASE=fee-collector-scanner \
-  mongo:7.0
+docker-compose up mongodb -d
 
 # Update your .env file to use authentication
-MONGODB_URI=mongodb://admin:password123@localhost:27017/fee-collector-scanner?authSource=admin
+MONGODB_URI=mongodb://localhost:27017/fee-collector-scanner
 ```
 
 ### 4. Initialize Database (Optional)
